@@ -1,0 +1,17 @@
+{
+  "azure_devops": {
+    "organization": "your-organization",
+    "default_project": "your-project",
+    "pat": "",
+    "api_version": "7.1"
+  },
+  "server": {
+    "port": 8003,
+    "host": "0.0.0.0"
+  },
+  "common_queries": {
+    "my_work_items": "SELECT [System.Id], [System.Title], [System.State], [System.AssignedTo] FROM WorkItems WHERE [System.AssignedTo] = @Me AND [System.State] <> 'Closed' ORDER BY [System.ChangedDate] DESC",
+    "recent_bugs": "SELECT [System.Id], [System.Title], [System.State] FROM WorkItems WHERE [System.WorkItemType] = 'Bug' AND [System.State] = 'Active' ORDER BY [System.CreatedDate] DESC",
+    "active_prs": "Active pull requests assigned to me or created by me"
+  }
+}

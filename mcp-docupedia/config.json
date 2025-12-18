@@ -1,0 +1,26 @@
+{
+  "confluence": {
+    "host": "inside-docupedia.bosch.com/confluence",
+    "api_token": "MzMzNzMzMzcyMTE1Oifhdasgj9d055E9NQQV2Vu0E5uk",
+    "username": "",
+    "password": ""
+  },
+  "proxy": {
+    "enabled": true,
+    "url": "http://localhost:3128",
+    "disable_ssl_verification": true
+  },
+  "server": {
+    "port": 8004,
+    "host": "0.0.0.0"
+  },
+  "common_spaces": {
+    "example": "CONLP",
+    "documentation": "DOCS",
+    "projects": "PROJ"
+  },
+  "search_defaults": {
+    "max_results": 25,
+    "content_type": "page"
+  }
+}
