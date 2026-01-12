@@ -3,8 +3,8 @@
     Startet alle MCP Server und das UI Dashboard mit uv
 .DESCRIPTION
     Dieses Script startet alle MCP Server mit uv:
-    - MCP ADO Server (Port 8001)
-    - MCP Docupedia Server (Port 8002)
+    - MCP ADO Server (Port 8003)
+    - MCP Docupedia Server (Port 8004)
     - MCP Gateway UI Dashboard
 #>
 
@@ -12,6 +12,19 @@ $ErrorActionPreference = "Stop"
 
 Write-Host "=== MCP Connector Launcher ===" -ForegroundColor Cyan
 Write-Host ""
+
+# Lade .env Datei wenn vorhanden
+if (Test-Path ".\.env") {
+    Write-Host "Lade .env Konfiguration..." -ForegroundColor Gray
+    Get-Content ".\.env" | ForEach-Object {
+        if ($_ -match "^([^=]+)=(.*)$") {
+            $key = $matches[1]
+            $value = $matches[2]
+            [Environment]::SetEnvironmentVariable($key, $value)
+        }
+    }
+    Write-Host "  OK .env geladen" -ForegroundColor Green
+}
 
 $ADOColor = "Green"
 $DocupediaColor = "Yellow"

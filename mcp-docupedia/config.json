@@ -1,7 +1,7 @@
 {
   "confluence": {
     "host": "inside-docupedia.bosch.com/confluence",
-    "api_token": "MzMzNzMzMzcyMTE1Oifhdasgj9d055E9NQQV2Vu0E5uk",
+    "api_token": "${CONFLUENCE_API_TOKEN}",
     "username": "",
     "password": ""
   },
