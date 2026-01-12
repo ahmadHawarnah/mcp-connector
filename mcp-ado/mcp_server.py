@@ -20,6 +20,14 @@ import os
 from pathlib import Path
 import base64
 import requests
+from dotenv import load_dotenv
+
+# Load .env file from parent directory
+env_path = Path(__file__).parent.parent / '.env'
+if env_path.exists():
+    load_dotenv(env_path)
+    logger = logging.getLogger(__name__)
+    logger.info(f"Loaded .env from {env_path}")
 
 # Set up logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -64,10 +72,22 @@ def _load_config():
 def _get_auth_header():
     """Get authentication header for Azure DevOps API"""
     config = _load_config()
-    pat = config.get('azure_devops', {}).get('pat') or os.getenv('AZURE_DEVOPS_PAT')
+    pat = config.get('azure_devops', {}).get('pat')
+    
+    # Expand environment variable if it's in ${VAR} format
+    if pat and pat.startswith('${') and pat.endswith('}'):
+        var_name = pat[2:-1]  # Extract variable name from ${VAR}
+        pat = os.getenv(var_name)
+        logger.info(f"Expanded PAT from environment variable: {var_name}")
+    
+    # Fallback to direct environment variable
+    if not pat:
+        pat = os.getenv('AZURE_DEVOPS_PAT')
     
     if not pat:
         raise ValueError("Azure DevOps PAT not configured")
+    
+    logger.info(f"Using PAT: {pat[:10]}... (length: {len(pat)})")
     
     # Encode PAT for Basic authentication
     encoded_pat = base64.b64encode(f":{pat}".encode()).decode()
@@ -91,17 +111,44 @@ def _make_ado_request(
     headers = _get_auth_header()
     headers["Content-Type"] = "application/json"
     
-    if method == "GET":
-        response = requests.get(url, headers=headers)
-    elif method == "POST":
-        response = requests.post(url, headers=headers, json=body)
-    elif method == "PATCH":
-        response = requests.patch(url, headers=headers, json=body)
-    else:
-        raise ValueError(f"Unsupported method: {method}")
+    logger.info(f"ADO Request: {method} {url}")
     
-    response.raise_for_status()
-    return response.json()
+    try:
+        if method == "GET":
+            response = requests.get(url, headers=headers, timeout=30)
+        elif method == "POST":
+            response = requests.post(url, headers=headers, json=body, timeout=30)
+        elif method == "PATCH":
+            response = requests.patch(url, headers=headers, json=body, timeout=30)
+        else:
+            raise ValueError(f"Unsupported method: {method}")
+        
+        logger.info(f"ADO Response: {response.status_code} ({len(response.content)} bytes)")
+        
+        # Check for non-2xx status codes
+        if not response.ok:
+            logger.error(f"ADO Error Response: {response.status_code}")
+            logger.error(f"Response Headers: {dict(response.headers)}")
+            logger.error(f"Response Body: {response.text[:500]}")
+            response.raise_for_status()
+        
+        # Try to parse JSON response
+        try:
+            return response.json()
+        except requests.exceptions.JSONDecodeError as e:
+            logger.error(f"Failed to parse JSON response")
+            logger.error(f"Content-Type: {response.headers.get('Content-Type', 'unknown')}")
+            logger.error(f"Response Text (first 1000 chars): {response.text[:1000]}")
+            raise ValueError(
+                f"Azure DevOps API returned non-JSON response. "
+                f"Status: {response.status_code}, "
+                f"Content-Type: {response.headers.get('Content-Type', 'unknown')}, "
+                f"Body preview: {response.text[:200]}"
+            ) from e
+            
+    except requests.exceptions.RequestException as e:
+        logger.error(f"Request failed: {e}")
+        raise ValueError(f"Failed to connect to Azure DevOps: {e}") from e
 
 # Initialize on module load for standalone mode
 if __name__ == "__main__" or os.getenv('MCP_STANDALONE'):

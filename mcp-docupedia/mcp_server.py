@@ -23,6 +23,14 @@ from pathlib import Path
 import base64
 import requests
 from urllib.parse import quote
+from dotenv import load_dotenv
+
+# Load .env file from parent directory
+env_path = Path(__file__).parent.parent / '.env'
+if env_path.exists():
+    load_dotenv(env_path)
+    logger = logging.getLogger(__name__)
+    logger.info(f"Loaded .env from {env_path}")
 
 # Set up logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -69,9 +77,20 @@ def _get_auth_header():
     config = _load_config()
     
     # Try PAT first (Personal Access Token)
-    pat = config.get('confluence', {}).get('api_token') or os.getenv('CONFLUENCE_API_TOKEN')
+    pat = config.get('confluence', {}).get('api_token')
+    
+    # Expand environment variable if it's in ${VAR} format
+    if pat and pat.startswith('${') and pat.endswith('}'):
+        var_name = pat[2:-1]  # Extract variable name from ${VAR}
+        pat = os.getenv(var_name)
+        logger.info(f"Expanded API token from environment variable: {var_name}")
+    
+    # Fallback to direct environment variable
+    if not pat:
+        pat = os.getenv('CONFLUENCE_API_TOKEN')
     
     if pat:
+        logger.info(f"Using API token: {pat[:10]}... (length: {len(pat)})")
         # For Confluence Cloud/DC with PAT
         encoded_auth = base64.b64encode(f":{pat}".encode()).decode()
         return {"Authorization": f"Bearer {pat}"}
