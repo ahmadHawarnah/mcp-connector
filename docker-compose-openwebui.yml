@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:latest
+    container_name: open-webui
+    restart: unless-stopped
+    ports:
+      - "3000:8080"  # Open WebUI läuft auf Port 3000 (extern) -> 8080 (intern)
+    environment:
+      # Bosch Proxy
+      - HTTP_PROXY=http://rb-proxy-de.bosch.com:8080
+      - HTTPS_PROXY=http://rb-proxy-de.bosch.com:8080
+      - NO_PROXY=localhost,127.0.0.1,mcp-servers
+      # MCP Gateway Konfiguration
+      - ENABLE_MCP_SERVERS=true
+      - MCP_SERVERS=http://mcp-servers:8001
+    volumes:
+      - open-webui-data:/app/backend/data
+    networks:
+      - mcp-network
+    depends_on:
+      - mcp-servers
+
+  mcp-servers:
+    image: mcp-servers:latest
+    container_name: mcp-servers
+    restart: unless-stopped
+    ports:
+      - "8001:8001"  # Gateway UI
+      - "8003:8003"  # ADO Server
+      - "8004:8004"  # Docupedia Server
+    environment:
+      - HTTP_PROXY=http://rb-proxy-de.bosch.com:8080
+      - HTTPS_PROXY=http://rb-proxy-de.bosch.com:8080
+    volumes:
+      - ./mcp-ado/config.json:/app/mcp-ado/config.json:ro
+      - ./mcp-docupedia/config.json:/app/mcp-docupedia/config.json:ro
+      - ./mcp-gateway/gateway_config.json:/app/mcp-gateway/gateway_config.json:ro
+    networks:
+      - mcp-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8003/healthcheck", "&&", "curl", "-f", "http://localhost:8004/healthcheck"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+volumes:
+  open-webui-data:
+    driver: local
+
+networks:
+  mcp-network:
+    driver: bridge
