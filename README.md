@@ -178,11 +178,23 @@ NODE_TLS_REJECT_UNAUTHORIZED=0
 
 ### Start All Services
 
+**Option 1: Using Python Launcher**
+
+```powershell
+# Start MCP servers
+uv run launcher.py
+
+# In a separate terminal, start the Gateway UI
+uv run mcp-gateway/ui.py
+```
+
+**Option 2: Using PowerShell Script (Separate Windows)**
+
 ```powershell
 .\start-all.ps1
 ```
 
-The script starts all three servers in separate windows:
+The servers:
 - MCP ADO Server (Port 8003)
 - MCP Docupedia Server (Port 8004)
 - Gateway UI Dashboard (Port 8001)
@@ -197,13 +209,13 @@ The script starts all three servers in separate windows:
 
 ```powershell
 # ADO Server
-uv run python mcp-ado/mcp_server.py
+uv run mcp-ado/mcp_server.py
 
 # Docupedia Server  
-uv run python mcp-docupedia/mcp_server.py
+uv run mcp-docupedia/mcp_server.py
 
 # Gateway UI
-uv run python mcp-gateway/ui.py
+uv run mcp-gateway/ui.py
 ```
 
 ## Endpoints
@@ -212,7 +224,7 @@ uv run python mcp-gateway/ui.py
 | ------- | -------- | ------------ |
 | MCP ADO Server | <http://localhost:8003/mcp> | <http://localhost:8003/healthcheck> |
 | MCP Docupedia Server | <http://localhost:8004/mcp> | <http://localhost:8004/healthcheck> |
-| Gateway | <http://localhost:8001/mcp> | <http://localhost:8001/health>
+| Gateway | <http://localhost:8001/mcp> | <http://localhost:8001/health> |
 
 ## Project Structure
 
