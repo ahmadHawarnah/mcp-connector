@@ -1,4 +1,11 @@
 {
+  "env": {
+    "HTTP_PROXY": "http://localhost:3128",
+    "HTTPS_PROXY": "http://localhost:3128",
+    "http_proxy": "http://localhost:3128",
+    "https_proxy": "http://localhost:3128",
+    "NODE_TLS_REJECT_UNAUTHORIZED": "0"
+  },
   "confluence": {
     "host": "inside-docupedia.bosch.com/confluence",
     "api_token": "${CONFLUENCE_API_TOKEN}",

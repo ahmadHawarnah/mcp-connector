@@ -1,4 +1,11 @@
 {
+  "env": {
+    "HTTP_PROXY": "http://localhost:3128",
+    "HTTPS_PROXY": "http://localhost:3128",
+    "http_proxy": "http://localhost:3128",
+    "https_proxy": "http://localhost:3128",
+    "NODE_TLS_REJECT_UNAUTHORIZED": "0"
+  },
   "azure_devops": {
     "organization": "bosch-bci",
     "default_project": "Nx_IES",
