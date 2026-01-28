@@ -16,7 +16,7 @@ This MCP server enables access to Confluence/Docupedia via the REST API. It supp
 - ✅ **Collaboration**: Comments, attachments, and labels
 - ✅ **Proxy Support**: Corporate proxy support
 - ✅ **SSL**: Optional SSL verification for internal CAs
-- ✅ **HTTP Transport**: Server-Sent Events (SSE)
+- ✅ **HTTP Transport**: Streaming HTTP via FastMCP v2
 - ✅ **CORS Support**: Browser-based access enabled
 
 ## Endpoint

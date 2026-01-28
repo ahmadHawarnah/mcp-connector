@@ -16,7 +16,7 @@ This MCP server provides comprehensive access to Azure DevOps via the REST API. 
 - ✅ **Pull Requests**: PR management and review processes
 - ✅ **Code Search**: Full-text search across all repositories
 - ✅ **WIQL**: Advanced work item queries with Work Item Query Language
-- ✅ **HTTP Transport**: Server-Sent Events (SSE) for real-time updates
+- ✅ **HTTP Transport**: Streaming HTTP via FastMCP v2
 - ✅ **CORS Support**: Browser-based access enabled
 
 ## Endpoint
