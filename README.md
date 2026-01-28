@@ -186,11 +186,9 @@ The servers:
 - MCP Docupedia Server (Port 8004)
 - Gateway UI Dashboard (Port 8001)
 
-### Stop All Services
+**Stopping Services:**
 
-```powershell
-.\stop-all.ps1
-```
+Press `Ctrl+C` in the terminal to stop the launcher and all running servers.
 
 ### Start Individual Services
 
@@ -218,11 +216,15 @@ uv run mcp-gateway/ui.py
 ```text
 mcp-connector/
 ├── .venv/                    # Shared virtual environment
+├── .env                      # Environment variables (PATs, tokens)
+├── env.txt                   # Environment template
 ├── pyproject.toml            # Central dependency management
+├── uv.lock                   # Dependency lock file
 ├── setup.ps1                 # Setup script
-├── start-all.ps1             # Start all services
-├── stop-all.ps1              # Stop all services
+├── launcher.py               # Unified launcher for all servers
+├── start-all.ps1             # Start all services in separate windows
 ├── README.md                 # This file
+├── docs/                     # Documentation and diagrams
 ├── mcp-ado/
 │   ├── mcp_server.py         # ADO Server
 │   ├── config.json           # ADO Configuration
