@@ -452,30 +452,6 @@ def get_page_labels(
     """
     return _make_confluence_request(f"content/{page_id}/label")
 
-@mcp.tool
-def add_label(
-    page_id: str,
-    label_name: str
-) -> Dict[str, Any]:
-    """
-    Add a label/tag to a Confluence page
-    
-    Args:
-        page_id: Page ID
-        label_name: Label name (without prefix)
-    
-    Returns:
-        Created label details
-    """
-    body = [
-        {
-            "prefix": "global",
-            "name": label_name
-        }
-    ]
-    
-    return _make_confluence_request(f"content/{page_id}/label", method="POST", body=body)
-
 # ============= Resources =============
 
 @mcp.resource("confluence://config")

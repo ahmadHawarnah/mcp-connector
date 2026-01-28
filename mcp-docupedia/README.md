@@ -37,17 +37,13 @@ This MCP server enables access to Confluence/Docupedia via the REST API. It supp
 ### Page Operations
 
 - `get_page` - Get page by ID or title
-- `create_page` - Create new page
-- `update_page` - Update existing page
 - `get_page_children` - Get child pages
 
 ### Collaboration
 
 - `get_page_comments` - Get comments on a page
-- `add_comment` - Add comment
 - `get_page_attachments` - Get attachments
 - `get_page_labels` - Get labels/tags
-- `add_label` - Add label
 
 ## Further Information
 
@@ -118,11 +114,12 @@ pip install px-proxy
 px --proxy=rb-proxy-de.bosch.com:8080 --listen=127.0.0.1:3128
 ```
 
-2. Set environment variables:
+1. Set environment variables:
+
 ```powershell
 $env:HTTP_PROXY = "http://localhost:3128"
 $env:HTTPS_PROXY = "http://localhost:3128"
 $env:NODE_TLS_REJECT_UNAUTHORIZED = "0"
 ```
 
-3. Use configuration with proxy enabled and SSL verification disabled
+1. Use configuration with proxy enabled and SSL verification disabled
