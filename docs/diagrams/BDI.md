@@ -33,8 +33,6 @@ graph TB
     style MCPServer fill:#fff3e0
     style Backend fill:#e8f5e9
     style LLM fill:#f3e5f5
-    style FileSystem fill:#f5f5f5
-    style LocalApps fill:#f5f5f5
 ```
 
 ## Implementation Guide
