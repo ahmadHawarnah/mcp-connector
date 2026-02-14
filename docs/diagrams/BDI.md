@@ -13,12 +13,12 @@ graph TB
         subgraph "Client/Browser"
             UI[Document Intelligence]
         end
-        MCPServer[MCP Server]
-        FileSystem[File System<br/>Documents]
-        LocalApps[Local Applications]
+        MCPGateway[MCP Gateway]
+        MCPAdo[MCP <br> Azure DevOps]
+        MCPDocupdia[MCP <br> Docupedia (Confluence)]
         
-        MCPServer <--> FileSystem
-        MCPServer <--> LocalApps
+        MCPGateway <--> MCPAdo
+        MCPGateway <--> MCPDocupdia
     end
     
     subgraph "Cloud/Hyperscaler"
