@@ -15,7 +15,7 @@ graph TB
         end
         MCPGateway[MCP Gateway]
         MCPAdo[MCP <br> Azure DevOps]
-        MCPDocupdia[MCP <br> Docupedia (Confluence)]
+        MCPDocupdia[MCP <br> Docupedia "Confluence"]
         
         MCPGateway <--> MCPAdo
         MCPGateway <--> MCPDocupdia
