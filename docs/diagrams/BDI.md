@@ -14,8 +14,8 @@ graph TB
             UI[Document Intelligence]
         end
         MCPGateway[MCP Gateway]
-        MCPAdo[MCP <br> Azure DevOps]
-        MCPDocupdia[MCP <br> Docupedia Confluence]
+        MCPAdo[MCP<br/>Azure DevOps]
+        MCPDocupdia[MCP<br/>Docupedia Confluence]
         
         MCPGateway <--> MCPAdo
         MCPGateway <--> MCPDocupdia
