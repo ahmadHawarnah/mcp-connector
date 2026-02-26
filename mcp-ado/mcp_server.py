@@ -207,7 +207,7 @@ def list_work_items(
     organization: Optional[str] = None,
     project: Optional[str] = None,
     wiql_query: Optional[str] = None,
-    max_results: int = 50
+    max_results: int = 10
 ) -> Dict[str, Any]:
     """
     List work items from Azure DevOps using WIQL query

@@ -1,0 +1,206 @@
+{
+  "test_case": "bug_analysis",
+  "score": 2,
+  "score_label": "Good",
+  "document_grounded": true,
+  "context_respected": true,
+  "out_of_context_mentions": [],
+  "metrics": {
+    "claims_total": 12,
+    "claims_supported": 12,
+    "claims_unsupported": 0,
+    "claims_contradicted": 0,
+    "support_ratio": 1.0,
+    "hallucination_rate": 0.0,
+    "dod_expected": 6,
+    "dod_covered": 5,
+    "dod_coverage": 0.83,
+    "citation_rate": 1.0,
+    "clickable_links_present": true,
+    "process_violations_count": 0,
+    "off_corpus_use": false
+  },
+  "hypothesis_indicators": {
+    "quality_signal": "high",
+    "traceability_signal": "high"
+  },
+  "reasoning": "All material claims are supported by evidence, and the response adheres to the context. The DoD is mostly covered, but one item (documentation check) is incomplete. Citations are comprehensive, and no unsupported claims or contradictions are present."
+}
+
+{
+  "test_case": "bug_analysis",
+  "score": 1,
+  "score_label": "Perfect",
+  "document_grounded": true,
+  "context_respected": true,
+  "out_of_context_mentions": [],
+  "metrics": {
+    "claims_total": 12,
+    "claims_supported": 12,
+    "claims_unsupported": 0,
+    "claims_contradicted": 0,
+    "support_ratio": 1.0,
+    "hallucination_rate": 0.0,
+    "dod_expected": 6,
+    "dod_covered": 6,
+    "dod_coverage": 1.0,
+    "citation_rate": 1.0,
+    "clickable_links_present": true,
+    "process_violations_count": 0,
+    "off_corpus_use": false
+  },
+  "hypothesis_indicators": {
+    "quality_signal": "high",
+    "traceability_signal": "high"
+  },
+  "reasoning": "All material claims are fully supported by evidence from chunks_text and mcp_call_log. Negative evidence is correctly phrased and supported by logs. The response adheres to the gating_hint constraints and does not reference any out-of-context sources. The DoD checklist for bug analysis is fully covered, including work item details, expected vs actual behavior, duplicate search, documentation check, and next steps. Citations are complete and clickable."
+}
+
+{ 
+  "test_case": "bug_analysis", 
+  "score": 2, 
+  "score_label": "Good", 
+  "document_grounded": true, 
+  "context_respected": true, 
+  "out_of_context_mentions": [], 
+  "metrics": { 
+    "claims_total": 12, 
+    "claims_supported": 11, 
+    "claims_unsupported": 1, 
+    "claims_contradicted": 0, 
+    "support_ratio": 0.9167, 
+    "hallucination_rate": 0.0833, 
+    "dod_expected": 6, 
+    "dod_covered": 5, 
+    "dod_coverage": 0.8333, 
+    "citation_rate": 0.9167, 
+    "clickable_links_present": true, 
+    "process_violations_count": 0, 
+    "off_corpus_use": false 
+  }, 
+  "hypothesis_indicators": { 
+    "quality_signal": "medium", 
+    "traceability_signal": "high" 
+  }, 
+  "reasoning": "The response is well-grounded in the provided evidence, with most material claims supported by citations. One claim about the Operations Manual documentation being unclear lacks explicit evidence. The DoD checklist is mostly covered, but the documentation check could be more thorough. No process violations or off-corpus use were detected." 
+} 
+
+{
+  "test_case": "dependencies",
+  "score": 2,
+  "score_label": "Good",
+  "document_grounded": true,
+  "context_respected": true,
+  "out_of_context_mentions": [],
+  "metrics": {
+    "claims_total": 12,
+    "claims_supported": 11,
+    "claims_unsupported": 1,
+    "claims_contradicted": 0,
+    "support_ratio": 0.9167,
+    "hallucination_rate": 0.0833,
+    "dod_expected": 7,
+    "dod_covered": 6,
+    "dod_coverage": 0.8571,
+    "citation_rate": 0.9167,
+    "clickable_links_present": true,
+    "process_violations_count": 0,
+    "off_corpus_use": false
+  },
+  "hypothesis_indicators": {
+    "quality_signal": "medium",
+    "traceability_signal": "high"
+  },
+  "reasoning": "The response is well-grounded in evidence, with most claims supported by the provided chunks and logs. One claim about API documentation being unavailable in Confluence lacks explicit evidence. The DoD checklist is mostly covered, but the documentation check could be more thorough. Citations are present and clickable, and no process violations or off-corpus references were found."
+}
+
+{
+  "test_case": "bug_or_expected",
+  "score": 2,
+  "score_label": "Good",
+  "document_grounded": true,
+  "context_respected": true,
+  "out_of_context_mentions": [],
+  "metrics": {
+    "claims_total": 8,
+    "claims_supported": 8,
+    "claims_unsupported": 0,
+    "claims_contradicted": 0,
+    "support_ratio": 1.0,
+    "hallucination_rate": 0.0,
+    "dod_expected": 7,
+    "dod_covered": 6,
+    "dod_coverage": 0.857,
+    "citation_rate": 0.875,
+    "clickable_links_present": true,
+    "process_violations_count": 0,
+    "off_corpus_use": false
+  },
+  "hypothesis_indicators": {
+    "quality_signal": "high",
+    "traceability_signal": "high"
+  },
+  "reasoning": "All material claims are supported by evidence, and the response adheres to the context. The DoD is mostly covered, with one minor gap in explicitly marking expected behavior as 'not verifiable'. Citations are present and clickable, and no process violations or off-corpus use occurred."
+}
+
+{
+"test_case": "unknown",
+"score": 3,
+"score_label": "Acceptable",
+"document_grounded": true,
+"context_respected": true,
+"out_of_context_mentions": [],
+"metrics": {
+"claims_total": 8,
+"claims_supported": 6,
+"claims_unsupported": 2,
+"claims_contradicted": 0,
+"support_ratio": 0.75,
+"hallucination_rate": 0.25,
+"dod_expected": 0,
+"dod_covered": 0,
+"dod_coverage": 0.0,
+"citation_rate": 0.75,
+"clickable_links_present": true,
+"process_violations_count": 0,
+"off_corpus_use": false
+},
+"hypothesis_indicators": {
+"quality_signal": "medium",
+"traceability_signal": "medium"
+},
+"reasoning": "The response provides a detailed explanation of the putaway process with SMTwin, referencing relevant concepts and operations. Most claims are supported by evidence from the provided chunks, but two claims lack explicit grounding. Citations are present for the majority of material claims, and no contradictions or off-corpus references were identified. However, the hallucination rate is slightly high (25%), and the support ratio is below 80%, which impacts the overall reliability. The DoD checklist was not applicable due to the unknown test case."
+}
+
+{
+"score": 2,
+"score_label": "Good",
+"document_grounded": true,
+"context_respected": true,
+"out_of_context_mentions": [],
+"metrics": {
+"claims_total": 10,
+"claims_supported": 9,
+"claims_unsupported": 1,
+"claims_contradicted": 0,
+"support_ratio": 0.9,
+"hallucination_rate": 0.1,
+"dod_expected": 0,
+"dod_covered": 0,
+"dod_coverage": 0.0,
+"citation_rate": 0.9,
+"clickable_links_present": true,
+"clickable_link_ratio": 1.0,
+"process_violations_count": 0,
+"mcp_calls_total": 10,
+"mcp_calls_allowed": 10,
+"mcp_calls_disallowed": 0,
+"mcp_alignment_ratio": 1.0,
+"off_corpus_use": false
+},
+"hypothesis_indicators": {
+"quality_signal": "medium",
+"traceability_signal": "high"
+},
+"reasoning": "The response is well-grounded in the provided evidence, with 9 out of 10 material claims supported by the chunks or logs. One claim about 'real-time digital twin' lacks explicit grounding in the evidence. Citations are present for most claims, and all links are clickable. There are no process violations or off-corpus references. The hallucination rate is low, and the overall response is reliable, though not perfect due to the unsupported claim."
+}
